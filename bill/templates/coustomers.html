@@ -1,0 +1,57 @@
+{%include 'base.html'%}
+{%block body%}
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;900&display=swap');
+    
+    *, body {
+        color: white;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 400;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+        -moz-osx-font-smoothing: grayscale;
+    }
+    
+    html, body {
+        height: 100%;
+        background-color: #152733;
+       
+    }
+    .xcontainer{
+        border: 3px white solid;
+        border-radius: 10px;
+    }
+    .nav-link{
+      color: white;
+  }
+</style>
+
+
+<div class="container xcontainer my-5 py-5">
+<table class="table" style="text-align:center;">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Coustomer name</th>
+        <th scope="col">Coustomer number</th>
+        <th scope="col">Coustomer CIty</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        {%for i in coustomer%}
+        <th scope="row">{{forloop.counter}}</th>
+        <td>{{i.c_name}}</td>
+        <td>{{i.c_number}}</td>
+        <td>{{i.c_city}}</td>
+        <td><a href="/generate/old-{{i.c_id}}/" class="btn btn-info">Create Bill</a></td>
+        <td><a href="/showBills/spec-{{i.c_id}}/" class="btn btn-light">Show all bills</a></td>
+      </tr>
+      {%endfor%}
+    </tbody>
+  </table>
+</div>
+{%endblock%}

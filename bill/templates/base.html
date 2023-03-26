@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=0.5">
+    <title>Bill App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+  <link rel="stylesheet"
+  href=
+  "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+
+<style>
+    .gradient-custom {
+    /* fallback for old browsers */
+    /* background: #f3cd9a; */
+  
+    /* Chrome 10-25, Safari 5.1-6 */
+    /* background: -webkit-linear-gradient(to right, rgba(141, 86, 10, 0.2), rgba(135, 46, 16, 0.2)); */
+  
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    /* background: linear-gradient(to right, rgba(179, 92, 175, 0.2), rgba(225, 115, 78, 0.2)); */
+    height: 93.5vh;
+
+    background: -moz-linear-gradient(45deg, rgba(213, 15, 61, 0.6), rgba(13, 17, 198, 0.69) 100%);
+  background: -webkit-linear-gradient(45deg, rgba(213, 15, 61, 0.6), rgba(13, 17, 198, 0.69) 100%);
+  background: linear-gradient(to 45deg, rgba(213, 15, 61, 0.6), rgba(13, 17, 198, 0.69) 100%);
+  }
+  .gradient-custom-nav{
+    background: -moz-linear-gradient(45deg, rgba(213, 15, 61, 0.6), rgba(13, 17, 198, 0.69) 100%);
+  background: -webkit-linear-gradient(45deg, rgba(213, 15, 61, 0.6), rgba(13, 17, 198, 0.69) 100%);
+  background: linear-gradient(to 45deg, rgba(213, 15, 61, 0.6), rgba(13, 17, 198, 0.69) 100%);
+  
+  color: rgb(247, 247, 247);
+  font-family: 'Righteous', cursive;
+  }
+
+  .active{
+    font-size:1.3rem;
+    font-weight:400;
+    color: white;
+  }
+  .active2{
+    color:black;
+  }
+  .sbar{
+    width:10vw;
+    color:white;
+    outline:none;
+    border:none;
+    border:black 2px solid;
+    border-radius: 1rem;
+    padding:0.3rem 0.8rem;
+    background-color: transparent;
+  }
+</style>
+  </head>
+<body>
+    <nav class="navbar navbar-expand-lg sticky-top gradient-custom-nav">
+        <div class="container-fluid   d-flex">
+          <a class="navbar-brand nav-link" href="/">Bill App</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class=" nav-link {%if request.path == '/'%}active active2{%endif%}" aria-current="page" href="/">Home</a>
+              </li>
+              {%if user.is_authenticated%}
+              <li class="nav-item">
+                <a class="nav-link {%if request.path == '/create/'%}active{%endif%}" href="/create">Create items</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {%if request.path == '/generate/orignal/'%}active{%endif%}" href="/generate/orignal/">Generate bill</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {%if request.path == '/modify/'%}active{%endif%}" href="/modify">Modify products</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {%if request.path == '/showBills/orignal/'%}active{%endif%}" href="/showBills/orignal/">Bills</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {%if request.path == '/showItems/'%}active{%endif%}" href="/showItems/">Items</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {%if request.path == '/showCoustomers/'%}active{%endif%}" href="/showCoustomers/">Coustomers</a>
+              </li>
+              {%if '/showCoustomers/' in request.path or '/showBills' in request.path or '/showItems/' in request.path%}
+              <li class="nav-item px-5 py-2">
+                <form action="" method="get">
+                  <input type="text" class="sbar" placeholder="Search.." name="search" id="search">
+                  <button class="btn btn-dark" type="submit"><i class="fa fa-search"></i></button>
+              </li>
+              {%endif%}
+              {%endif%}
+            </ul>
+            
+          </div>
+          <div class="collapse navbar-collapse justify-content-xl-end" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+              {%if not user.is_authenticated%}
+              <li class="nav-item">
+                <a class="nav-link " aria-current="page" href="/login/">Login</a>
+              </li>
+              <li class="nav-link">|</li>
+              <li class="nav-item">
+                <a class="nav-link" href="/register/">Register</a>
+              </li>
+              {%endif%}
+
+              {%if user.is_authenticated%}
+              <li class="nav-item">
+                <a class="nav-link" href="/logouti">Logout</a>
+              </li>
+              <li class="nav-link">|</li>
+              <li class="nav-item">
+              <a class="nav-link" href="/viewprofile/{{user}}/">View profile</a> 
+            </li> 
+              {%endif%}
+              
+              {% comment %} <li class="nav-item">
+                <a class="nav-link" href="/logouti">Logout</a>
+              </li>
+              <li class="nav-link">|</li>
+              <li class="nav-item">
+              <a class="nav-link" href="/viewp/{{user}}">View profile</a> 
+            </li>  {% endcomment %}
+              
+            </ul> 
+          </div>
+      
+        </div>
+            
+      </nav>
+
+{% include  "messages.html" %}
+
+
+      {% load static %}
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+      {% comment %} <script src="/static/script.js"></script> {% endcomment %}
+</body>
+</html>
