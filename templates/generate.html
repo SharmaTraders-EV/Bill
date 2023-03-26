@@ -1,0 +1,396 @@
+{%include 'base.html'%}
+{%block body%}
+
+<script>
+var counterG=1
+
+function addmoreG()
+{   
+    
+    let code = document.getElementById("code")
+    let qun = document.getElementById("qun")
+    let all_codes = document.getElementById("all_codes")
+    let a = all_codes.value.slice(1,-1);
+    let arr = a.split(",")
+    for(var i=0; i<arr.length; i++){
+        arr[i]=Number(arr[i])
+    }
+    function isInArray(value, array) {
+        return array.indexOf(value) >= 0;
+    }
+    if(isInArray(Number(code.value), arr))
+    {
+    
+        var html2=`<br>\
+        
+        <div class="col-md-6">\
+            <input class="form-control" type="text" name="productCode${counterG}" placeholder="Product Code" value="${code.value}" disabled="disabled" style="color:black; font-weight:400;"></input>\
+        </div>\
+        <div class="col-md-6">\
+            <input class="form-control" type="text" name="productQuantity${counterG}" placeholder="Product Quantity" value="${qun.value}" disabled="disabled" style="color:black; font-weight:400;">\
+        </div>\
+        `
+
+        
+        counterG+=1
+        if (counterG<100){
+            var x=document.getElementById("filled-row")
+            x.innerHTML+=html2
+            var y = document.getElementById("counterG")
+            y.value=counterG
+            
+
+        
+
+        }
+    }
+    else{
+        alert("Product code not exist. Please enter valid code");
+    }
+    code.value=""
+    qun.value=""
+
+    
+
+}
+function done(){
+    let purch_name = document.getElementById("purch_name")
+    let purch_num = document.getElementById("purch_num")
+    let purch_address = document.getElementById("purch_address")
+    let purch_city = document.getElementById("purch_city")
+    let disscount_v = document.getElementById("disscount-v")
+    let received_v = document.getElementById("received-v")
+    const form = document.getElementById("filled-form")
+    var data = Object.values(form).reduce((obj,field) => { obj[field.name] = field.value; return obj }, {})
+    y = JSON.stringify(data)
+    var fdata = document.getElementById("fdata")
+    fdata.value=y
+
+    var p_n = document.getElementById("purchaser")
+    p_n.value=purch_name.value
+    var p_num = document.getElementById("purchaser_num")
+    p_num.value=purch_num.value
+    var p_address = document.getElementById("purchaser_address")
+    p_address.value=purch_address.value
+    var p_city = document.getElementById("purchaser_city")
+    p_city.value=purch_city.value
+    var dis = document.getElementById("disscount")
+    dis.value=disscount_v.value
+    var received = document.getElementById("received")
+    received.value=received_v.value
+
+}
+
+</script>
+
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;900&display=swap');
+
+*, body {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+html, body {
+    height: 100%;
+    background-color: #152733;
+}
+
+
+.form-holder {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+   
+}
+
+.form-holder .form-content {
+    position: relative;
+    text-align: center;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    align-items: center;
+    padding: 60px;
+    flex-direction: column;
+}
+
+.form-content .form-items,.filled,.userDetails{
+    border: 3px solid #fff;
+    padding: 40px;
+    display: inline-block;
+    width: 100%;
+    min-width: 540px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    text-align: left;
+    -webkit-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+    margin: 2vh 0;
+}
+.filled{
+    height: 35vh;
+    width: 50vw;
+    overflow-y: scroll;
+}
+.userDetails{
+    width:50vw;
+    color:white;
+}
+.form-content h3 {
+    color: #fff;
+    text-align: left;
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.form-content h3.form-title {
+    margin-bottom: 30px;
+}
+
+.form-content p {
+    color: #fff;
+    text-align: left;
+    font-size: 17px;
+    font-weight: 300;
+    line-height: 20px;
+    margin-bottom: 30px;
+}
+
+
+.form-content label, .was-validated .form-check-input:invalid~.form-check-label, .was-validated .form-check-input:valid~.form-check-label{
+    color: #fff;
+}
+
+.form-content input[type=text], .form-content input[type=password], .form-content input[type=phone],.form-content input[type=email], .form-content select {
+    width: 100%;
+    padding: 9px 20px;
+    text-align: left;
+    border: 0;
+    outline: 0;
+    border-radius: 6px;
+    background-color: #fff;
+    font-size: 15px;
+    font-weight: 300;
+    color: #8D8D8D;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    margin-top: 16px;
+}
+
+
+.btn-primary{
+    background-color: #6C757D;
+    outline: none;
+    border: 0px;
+     box-shadow: none;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active{
+    background-color: #495056;
+    outline: none !important;
+    border: none !important;
+     box-shadow: none;
+}
+
+.form-content textarea {
+    position: static !important;
+    width: 100%;
+    padding: 8px 20px;
+    border-radius: 6px;
+    text-align: left;
+    background-color: #fff;
+    border: 0;
+    font-size: 15px;
+    font-weight: 300;
+    color: #8D8D8D;
+    outline: none;
+    resize: none;
+    height: 120px;
+    -webkit-transition: none;
+    transition: none;
+    margin-bottom: 14px;
+}
+
+.form-content textarea:hover, .form-content textarea:focus {
+    border: 0;
+    background-color: #ebeff8;
+    color: #8D8D8D;
+}
+
+.mv-up{
+    margin-top: -9px !important;
+    margin-bottom: 8px !important;
+}
+
+.invalid-feedback{
+    color: #ff606e;
+}
+
+.valid-feedback{
+   color: #2acc80;
+}
+
+.nav-link{
+    color: white;
+}
+
+</style>
+
+<div class="form-body">
+    <div class="row">
+        <div class="form-holder">
+            <div class="form-content">
+            <div class="userDetails">
+                <h3>Purchaser Details</h3>
+                <form>
+                    {%if origin == "orignal"%}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input class="form-control" type="text" placeholder="Purcaser Name" id="purch_name" required="required" style="color:black; font-weight:400;">
+                        </div>
+                        <div class="col-md-6">
+                            <input class="form-control" type="phone" placeholder="Purcaser phone number" id="purch_num" required="required" style="color:black; font-weight:400;">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input class="form-control" type="text" placeholder="Purcaser Address" id="purch_address" style="color:black; font-weight:400;">
+                        </div>
+                        <div class="col-md-6">
+                            <input class="form-control" type="phone" placeholder="Purcaser city" id="purch_city" style="color:black; font-weight:400;">
+                        </div>
+                    </div>
+                    {%endif%}
+                    {%if origin == "old"%}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input class="form-control" type="text" id="purch_name" value="{{c_data.c_name}}" disabled style="color:black; font-weight:400;">
+                        </div>
+                        <div class="col-md-6">
+                            <input class="form-control" type="phone" id="purch_num" value="{{c_data.c_number}}" disabled style="color:black; font-weight:400;">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <input class="form-control" type="text" id="purch_address" value="{{c_data.c_address}}" disabled style="color:black; font-weight:400;">
+                        </div>
+                        <div class="col-md-6">
+                            <input class="form-control" type="phone" id="purch_city" value="{{c_data.c_city}}" disabled style="color:black; font-weight:400;">
+                        </div>
+                    </div>
+                    {%endif%}
+                    <div class="row">
+                        <div class="col-md-6 pt-4 px-5">
+                            <h5><label>Any disscount : </label></h5>
+                        </div>
+                        <div class="col-md-6">
+                            <input class="form-control" type="text" placeholder="Any disscount" id="disscount-v" value="0" style="color:black; font-weight:400;">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 pt-4 px-5">
+                            <h5><label>Any Received amount: </label></h5>
+                        </div>
+                        <div class="col-md-6">
+                            <input class="form-control" type="text" placeholder="Received amount" id="received-v" value="0" style="color:black; font-weight:400;">
+                        </div>
+                    </div>
+                </form>
+            </div>
+                <div class="form-items">
+                    <h3>Fill in the data below</h3>
+                    <!-- <p>Fill in the data below.</p> -->
+                    <form>
+                        <div class="form-floating mb-3 col-sm-4" style="display:none">
+                            <textarea id="all_codes" cols="30" rows="10">{{all_codes}}</textarea>
+                        </div>
+                        
+
+                        <div class="row" id="ginfo">
+
+                            <div class="col-md-6">
+                                <input class="form-control" type="text" name="productCode" placeholder="Product Code" id="code" style="color:black; font-weight:400;">
+                                
+                            </div>
+                        
+                            <div class="col-md-6">
+                                <input class="form-control" type="text" name="productQuantity" placeholder="Product Quantity" id="qun" style="color:black; font-weight:400;">
+                            
+                            </div>
+                        </div>
+
+                        <div class="form-button mt-3">
+                            <!-- <button id="submit" type="submit" class="btn btn-primary">Generate Bill</button> -->
+                            <button  type="button" class="btn btn-primary" onclick="addmoreG()">Add more Product +</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="filled" id="filled">
+                    <div class="filled-row row">
+                        <div class="col-md-6"><h3 style="text-align: center;">Product code</h3></div>
+                        <div class="col-md-6"><h3 style="text-align: center;">Quantity</h3></div>
+                    </div>
+                    <hr>
+                    <form id="filled-form">
+                        <div class="filled-row row" id="filled-row">
+                        
+                            
+                        </div>
+                        
+                    
+                </div>
+                    <button type="button" class="btn btn-primary px-5 py-2 " onclick="done()" style="display:inline;">Save</button>
+
+                </form>
+                <form action="" method="post">{%csrf_token%}
+                    <div class="row" style="display:none">
+                        <div class="col-md-4">
+                            <input class="form-control" type="text" name="purchaser" placeholder="Purcaser Name" id="purchaser">
+                        </div>
+                        <div class="col-md-4">
+                            <input class="form-control" type="text" name="purchaser_num" placeholder="Purcaser Number" id="purchaser_num">
+                        </div>
+                        <div class="col-md-4">
+                            <input class="form-control" type="text" name="purchaser_address" placeholder="Purcaser address" id="purchaser_address">
+                        </div>
+                        <div class="col-md-4">
+                            <input class="form-control" type="text" name="purchaser_city" placeholder="Purcaser city" id="purchaser_city">
+                        </div>
+                        <div class="col-md-4">
+                            <input class="form-control" type="text" name="disscount" placeholder="Purcaser Number" id="disscount">
+                        </div>
+                        <div class="col-md-4">
+                            <input class="form-control" type="text" name="received" placeholder="received" id="received">
+                        </div>
+                        
+                    </div>
+                    <div class="form-floating mb-3 col-sm-4" style="display:none">
+                        <input class="form-control" name="counterG" id="counterG" type="number" value="1"/>
+                    </div>
+                    <div class="form-floating mb-3 col-sm-4" style="display:none">
+                        <input class="form-control" name="fdata" id="fdata" type="text"/>
+                    </div>
+                    <input type="submit" value="Submit" class="btn btn-primary px-5 py-2">
+                </form>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{%endblock%}

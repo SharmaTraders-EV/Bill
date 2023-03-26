@@ -1,0 +1,24 @@
+{% include 'base.html'%}
+{%block body%}
+
+<div class="conatiner" >
+    
+    <div class="gradient-custom" style="  display: flex; justify-content: center ; align-items: center;">
+        <div class="main-content" >
+            
+            <div class="form-group" >
+                <h1 style="color:rgb(241, 230, 241); font-family: 'Righteous', cursive ;">WELCOME TO THE APP</h1>
+                <h5 style="color:rgb(241, 230, 241); font-family: 'Righteous', cursive ;">Select from the below options </h5>
+                <a href="/create">
+                <button class="btn btn-light mt-2 mb-3 " type="button"   style="color:rgb(13, 0, 13) ; width: 20vw; height: 10vh; border-radius: 50px; font-family: 'Righteous', cursive;" >Create items</button>
+            </a>
+                <a href="/generate/orignal/">
+                <button class="btn btn-light mt-2 mb-3" type="button"   style="color:rgb(13, 0, 13) ; border-radius: 50px; width: 20vw; height: 10vh; font-family: 'Righteous', cursive;" >Generate Bill</button>
+            </a>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

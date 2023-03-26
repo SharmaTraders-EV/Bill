@@ -1,0 +1,41 @@
+{%include "base.html"%}
+{%block body%}
+<link rel="stylesheet" href="/static/vp_css.css">
+
+
+
+    <div class="container mt-5">
+        <div class="row data">
+
+            <div class="col-3">
+                <img src="https://www.svgimages.com/svg-image/s5/man-passportsize-silhouette-icon-256x256.png" alt="stack photo" class="img">
+            </div>
+
+            <div class="col-9 datainfo">
+                
+                <div class="row pt-3">
+                    <div class="col-4"><h1 class="">{{user.first_name}}</h1></div>
+                    <div class="col-4"></div>
+                    <div class="col-4"><a href="/changepassword/{{user.email}}/"><button class="btn btn-btn btn-danger">Change password</button></a></div>
+                </div>
+                <hr>
+                <div class="row p-3">
+                    <div class="col-4"><h5>Username : </h5></div>
+                    <div class="col-4"><h5>{{user.username}}</h5></div>
+                </div>
+                <div class="row p-3">
+                    <div class="col-4"><h5>Email : </h5></div>
+                    <div class="col-4"><h5>{{user.email}}</h5></div>
+                </div>
+                <div class="row p-3">
+                    <div class="col-4"><h5>Full Name : </h5></div>
+                    <div class="col-4"><h5>{{user.first_name}}&nbsp;{{user.last_name}}</h5></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+{% endblock %}
